@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+
+@theme {
+  /* This overrides Tailwind's default sans font family */
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-display: 'Bebas Neue', 'Manrope', sans-serif;
+}
+
+/* 1. Register custom utility classes with Tailwind v4 */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-stub-notch: var(--stub-notch);
+  --color-border-custom: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-red: var(--red);
+  --color-focus: var(--focus);
+  --shadow-custom: 0 4px 12px var(--shadow);
+}
+
+/* 2. Define light/dark theme variables */
+@layer base {
+  :root {
+    --bg: #0D0B12;
+    --surface: #191420;
+    --surface-raised: #221B2C;
+    --stub-notch: #0D0B12;
+    --border: #332A40;
+    --text: #F4F0EA;
+    --text-muted: #A69BB8;
+    --gold: #F0A93E;
+    --gold-dim: #C98A2E;
+    --red: #E2564E;
+    --focus: #F0A93E;
+    --shadow: rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F3EFE6;
+    --surface: #FFFFFF;
+    --surface-raised: #FBF8F1;
+    --stub-notch: #F3EFE6;
+    --border: #E3DACB;
+    --text: #241E2C;
+    --text-muted: #6C6478;
+    --gold: #C9781E;
+    --gold-dim: #A9631A;
+    --red: #C7392F;
+    --focus: #F0A93E;
+    --shadow: rgba(30, 20, 10, 0.12);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F3EFE6;
+      --surface: #FFFFFF;
+      --surface-raised: #FBF8F1;
+      --stub-notch: #F3EFE6;
+      --border: #E3DACB;
+      --text: #241E2C;
+      --text-muted: #6C6478;
+      --gold: #C9781E;
+      --gold-dim: #A9631A;
+      --red: #C7392F;
+      --focus: #F0A93E;
+      --shadow: rgba(30, 20, 10, 0.12);
+      color-scheme: light;
+    }
+  }
+}
