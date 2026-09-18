@@ -4,7 +4,7 @@ import Footer from "../components/Footer"
 
 export default function MainLayout() {
   return (
-    <div className="font-sans">
+    <div className="font-bebas">
         <div><Navbar/></div>
       <div>
         <Outlet/>
