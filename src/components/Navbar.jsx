@@ -27,7 +27,7 @@ export default function Navbar() {
               </button>
             </Link>
             <button
-              class="theme-toggle"
+              className="theme-toggle"
               id="themeToggle"
               aria-label="Toggle color theme"
               title="Toggle theme"
