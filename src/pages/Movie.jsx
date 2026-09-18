@@ -3,15 +3,39 @@ import Card from "../components/Card";
 
 export default function Movie() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("https://api.tvmaze.com/shows")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.log("Fetch error:", err));
+    const fetchMovies = async () => {
+      try {
+        const res = await fetch("https://api.tvmaze.com/shows");
+
+        if (!res.ok) {
+          throw new Error(res.message || "Something went wrong");
+        }
+
+        const data = await res.json();
+        setData(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMovies();
   }, []);
 
-  console.log(data);
+  // console.log(data);
+
+  if (isLoading) {
+    return <p className="text-center text-2xl text-green-400">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center text-2xl text-red-400">{error}</p>;
+  }
 
   return (
     <main id="listingView" className="view">
@@ -70,10 +94,8 @@ export default function Movie() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6.5 pb-22.5">
           {data.map((movie) => (
             <Card
-              image={movie.image.medium}
-              title={movie.name}
-              date={movie.ended}
-              rating={movie.rating.average}
+              key={movie.id}
+              movie={movie}
             />
           ))}
         </div>
